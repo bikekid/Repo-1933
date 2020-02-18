@@ -14,6 +14,7 @@ class Random {
   private static int[] options;
   private static boolean found = false;
   private static int randGen = 0;
+  private static int tOrF = 2;
 
 
   // constructor
@@ -25,7 +26,7 @@ class Random {
 
   //sets the seed in the random number generator
   public void setSeed(int seed){
-    s = seed;
+    rNew = seed;
   }
 
   //Return the value of M for this random number generator.
@@ -37,8 +38,9 @@ class Random {
   // If  this  method  is  called  again  without  resetting  the  seed,
   //it  shouldgenerate a different value.
   public int random(){
-    rNew = ((p1 * s) + p2) % m;
+    rNew = ((p1 * rNew) + p2) % m;
     return rNew;
+
   }
 
   //Return a random integer in the range lower to upper.
@@ -56,47 +58,65 @@ class Random {
        upperInt = upper;
     }
 
-    options = new int [(upperInt - lowerInt)];
+  //   options = new int [(upperInt - lowerInt)];
+  //
+  //
+  //   // creates an array of integers
+  //
+  //   for (int i = lowerInt; i < upperInt; i++){
+  //     options[i - lowerInt] = i;
+  //   }
+  //   //calls a random number and each number is checked to see
+  //   //if it is in the options array
+  //   while (found != true){
+  //     randGen = random();
+  //
+  //     for (int j = 0; j < options.length; j++){
+  //       if (randGen == options[j]) {
+  //         found = true ;
+  //     }
+  //   }
+  // }
 
+  randGen = random();
+  int difference = (randGen % (upper-lower) + lower);
 
-    // creates an array of integers
-
-    for (int i = lowerInt; i < upperInt; i++){
-      options[i - lowerInt] = i;
-    }
-    //calls a random number and each number is checked to see
-    //if it is in the options array
-    while (found != true){
-      randGen = random();
-
-      for (int j = 0; j < options.length; j++){
-        if (randGen == options[j]) {
-          found = true ;
-      }
-    }
-  }
-  return randGen;
+  return difference;
 }
-  // //Randomly return true or false
-  // public boolean randomBoolean(){
-  //
-  //
-  // }
-  //
+//Do m % 2
+  //Randomly return true or false
+  public boolean randomBoolean(){
+    randGen = random();
+    int choice = (randGen % 6);
+
+    if (choice == 1 || choice == 3 || choice == 5) {
+      return true;
+    }else{
+      return false;
+    }
+
+    // tOrF = randomInteger(0,1);
+    // if (tOrF == 1){
+    //   return true;
+    // } else {
+    //   return false;
+    // }
+  }
+
   // //Get  a  random  double  inthe range lower to upper.
-  // public double randomDouble(double lower, double upper){
-  //
-  // }
+  public double randomDouble(double lower, double upper){
+
+  }
 
   public static void main(String[] args) {
-    Random firstTest = new Random(8172327,65537,53);
-    firstTest.setSeed(8);
+    Random RandChoices = new Random(71,2,601);
+    RandChoices.setSeed(13);
 
-    System.out.println(firstTest.randomInteger(20,10));
-    System.out.println(firstTest.randomInteger(20,10));
-    System.out.println(firstTest.randomInteger(20,10));
-    System.out.println(firstTest.randomInteger(20,10));
-    System.out.println(firstTest.randomInteger(20,10));
+    for (int i = 0; i < 5; i++){
+      System.out.println(RandChoices.randomInteger(100,0));
+      System.out.println(RandChoices.randomBoolean());
+
+    }
 
   }
 }
