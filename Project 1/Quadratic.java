@@ -5,6 +5,7 @@ class Quadratic{
   private float a;
   private float b;
   private float c;
+  private String quad;
 
   public Quadratic(float a, float b, float c){
     this.a = a;
@@ -13,8 +14,6 @@ class Quadratic{
   }
 
   public Quadratic add(Quadratic other){
-    //integrate equals function before
-
     Quadratic AddedQuadratic = new Quadratic(a + other.a, b + other.b, c + other.c);
 
     return AddedQuadratic;
@@ -26,28 +25,38 @@ class Quadratic{
     return SubbQuadratic;
   }
 
-  // public roots()
+  public Roots findRoots(){
+    // Quadratic formula
+    double inside = (Math.pow(b,2) - 4 * a * c);
+    double insideSQrtd = Math.pow(inside, 0.5);
+
+    double firstRoot = ((-b + insideSQrtd)/(2*a));
+    double secondRoot = ((-b -insideSQrtd)/(2*a));
+
+    Roots quadRoots = new Roots(firstRoot,secondRoot);
+    return quadRoots;
+  }
+
+  public String toString(){
+    quad = ("" + a + "x^2 + " + b +"x +"+ c);
+    return quad;
+  }
 
   //checks to see if they are the same objecttype
-
   public boolean equals(Object other){
 
-
+    //checks to see if other is a Quadratic object
     if (!(other instanceof Quadratic)){
       return false;
     }
 
     Quadratic x = (Quadratic) other;
 
-  //   if ((x.a - a <= 0.0001) && (x.b - b <= 0.0001) && (x.c - c <= 0.0001)){
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // }
 
-  //
-    Quadratic y = this.subtract(x);
+    //Since x is converted into a Quadratic class, it is possible to call functions
+    //calling subtract, subtracts the class from x
+    Quadratic y = subtract(x);
+    //if the subtracted class has values less that .0001 then they are identical
     if (y.a <= 0.0001 && y.b <= 0.0001 && y.c <= 0.0001){
       return true;
     } else {
@@ -69,6 +78,10 @@ class Quadratic{
     Quadratic testQuad = new Quadratic(x, y, z);
     Quadratic compQuad = new Quadratic(a, b, c);
     System.out.println(testQuad.equals(compQuad));
+    System.out.println(compQuad.toString());
+    Roots rooty = compQuad.findRoots();
+    System.out.println(rooty.getRealPart() + " " +
+    rooty.getImaginaryPart());
 
   }
 

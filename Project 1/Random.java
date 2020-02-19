@@ -2,20 +2,19 @@
 
 class Random {
 
-  private static int p1 = 0;
-  private static int p2 = 0;
-  private static int m = 0;
-  private static int s = 0;
-  private static int rNew = 0;
-  private static int lowerInt = 0;
-  private static int upperInt = 0;
-  private static int rOld = 0;
-  private static int val = 0;
-  private static int[] options;
-  private static boolean found = false;
-  private static int randGen = 0;
-  private static int tOrF = 2;
-
+  private int p1 = 0;
+  private int p2 = 0;
+  private int m = 0;
+  private int rNew = 0;
+  private int lowerInt = 0;
+  private int upperInt = 0;
+  private int randGen = 0;
+  private int randGenD =0;
+  private double randNum;
+  private double up = 0.0;
+  private double low = 0.0;
+  private double randDoub = 0.0;
+  private boolean found = false;
 
   // constructor
   public Random(int p1, int p2, int m){
@@ -57,66 +56,56 @@ class Random {
        lowerInt = lower;
        upperInt = upper;
     }
-
-  //   options = new int [(upperInt - lowerInt)];
-  //
-  //
-  //   // creates an array of integers
-  //
-  //   for (int i = lowerInt; i < upperInt; i++){
-  //     options[i - lowerInt] = i;
-  //   }
-  //   //calls a random number and each number is checked to see
-  //   //if it is in the options array
-  //   while (found != true){
-  //     randGen = random();
-  //
-  //     for (int j = 0; j < options.length; j++){
-  //       if (randGen == options[j]) {
-  //         found = true ;
-  //     }
-  //   }
-  // }
-
   randGen = random();
   int difference = (randGen % (upper-lower) + lower);
-
   return difference;
 }
-//Do m % 2
+
   //Randomly return true or false
   public boolean randomBoolean(){
     randGen = random();
-    int choice = (randGen % 6);
-
-    if (choice == 1 || choice == 3 || choice == 5) {
+    int choice = (randGen % 6);//creates a choice variable of mod 6 just to give more options
+    if (choice == 1 || choice == 3 || choice == 5) {//this determines if it is either of these (50% chance) then it is true
       return true;
     }else{
       return false;
     }
-
-    // tOrF = randomInteger(0,1);
-    // if (tOrF == 1){
-    //   return true;
-    // } else {
-    //   return false;
-    // }
   }
 
-  // //Get  a  random  double  inthe range lower to upper.
+  // //Get  a  random  double  in the range lower to upper.
   public double randomDouble(double lower, double upper){
+    // I did this because if we swapped values it would be difficult to change
+    //them. Assigning to new variables is easy bc I don't have to worry about values
+    //being altered.
 
+    if (lower > upper) {
+
+       low = upper;
+       up = lower;
+
+    } else {
+       low = lower;
+       up = upper;
+    }
+    // found = false;
+
+    // while (found != true){
+      randGenD = random();
+      double randNum = randGenD / (up - low);
+      double randDoub = (low + randNum);
+    //   if (randDoub <= up && randDoub >= low){
+    //     found = true;
+    //   }
+    // }
+  return randDoub;
   }
 
   public static void main(String[] args) {
-    Random RandChoices = new Random(71,2,601);
+    Random RandChoices = new Random(71,11,771);
     RandChoices.setSeed(13);
-
-    for (int i = 0; i < 5; i++){
-      System.out.println(RandChoices.randomInteger(100,0));
-      System.out.println(RandChoices.randomBoolean());
-
-    }
-
+    for(int i = 0; i < 5; i++){
+      System.out.println(RandChoices.randomDouble(6.1234, 4.231274322));
+      System.out.println(RandChoices.randomInteger(50,100));
   }
+}
 }
