@@ -5,7 +5,6 @@ class Quadratic{
   private float a;
   private float b;
   private float c;
-  private String quad;
 
   public Quadratic(float a, float b, float c){
     this.a = a;
@@ -28,17 +27,29 @@ class Quadratic{
   public Roots findRoots(){
     // Quadratic formula
     double inside = (Math.pow(b,2) - 4 * a * c);
+    if (inside < 0){
+      inside = inside * -1;
+      double insideSQrtd = Math.pow(inside, 0.5);
+      insideSQrtd = insideSQrtd/((double)2 * (double) a);
+
+      double real = -b/(2 * a);
+
+      Roots quadRoots = new Roots(real, insideSQrtd);
+      return quadRoots;
+    } else {
     double insideSQrtd = Math.pow(inside, 0.5);
 
     double firstRoot = ((-b + insideSQrtd)/(2*a));
-    double secondRoot = ((-b -insideSQrtd)/(2*a));
+    double secondRoot = 0;
 
     Roots quadRoots = new Roots(firstRoot,secondRoot);
     return quadRoots;
   }
 
+  }
+
   public String toString(){
-    quad = ("" + a + "x^2 + " + b +"x +"+ c);
+    String quad = ("" + a + "x^2 + " + b +"x + "+ c);
     return quad;
   }
 
@@ -69,9 +80,9 @@ class Quadratic{
     float y = 3.0007f;
     float z = 1.0007f;
 
-    float a = 3.0000f;
-    float b = 6.0070f;
-    float c = 1.0020f;
+    float a = 3.0007f;
+    float b = 3.0070f;
+    float c = 1.00071f;
 
 
 
@@ -80,8 +91,7 @@ class Quadratic{
     System.out.println(testQuad.equals(compQuad));
     System.out.println(compQuad.toString());
     Roots rooty = compQuad.findRoots();
-    System.out.println(rooty.getRealPart() + " " +
-    rooty.getImaginaryPart());
+    System.out.println(rooty.toString());
 
   }
 

@@ -26,6 +26,18 @@ public class Roots{
     realPart = realPart - c.getRealPart();
     imaginaryPart = imaginaryPart - c.getImaginaryPart();
   }
+  public String toString(){
+    String s = "";
+    if (imaginaryPart != 0){
+      s = ("" + realPart + " + " +imaginaryPart + "i");
+      return s;
+
+    } else{
+      s = ("" + realPart + " + " + (realPart * -1) );
+      return s;
+    }
+
+  }
   // public boolean equals (Object anotherObject){
   //   Roots temp;
   //   boolean same = false;

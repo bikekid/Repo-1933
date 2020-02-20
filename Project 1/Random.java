@@ -87,17 +87,10 @@ class Random {
        low = lower;
        up = upper;
     }
-    // found = false;
-
-    // while (found != true){
-      randGenD = random();
-      double randNum = randGenD / (up - low);
-      double randDoub = (low + randNum);
-    //   if (randDoub <= up && randDoub >= low){
-    //     found = true;
-    //   }
-    // }
-  return randDoub;
+    randGen = random();
+    double x = (double) randGen / m;
+    double y = x * (upper - lower) + lower;
+    return y;
   }
 
   public static void main(String[] args) {
