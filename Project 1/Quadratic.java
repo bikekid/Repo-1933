@@ -39,10 +39,10 @@ class Quadratic{
     } else {
     double insideSQrtd = Math.pow(inside, 0.5);
 
-    double firstRoot = ((-b + insideSQrtd)/(2*a));
-    double secondRoot = 0;
+    double firstRootInside= ((-b + insideSQrtd)/(2*a));
+    double imagRoot = 0;
 
-    Roots quadRoots = new Roots(firstRoot,secondRoot);
+    Roots quadRoots = new Roots(firstRootInside,imagRoot);
     return quadRoots;
   }
 
